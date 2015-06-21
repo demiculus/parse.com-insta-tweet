@@ -306,9 +306,9 @@ function startBackgroundJob(request, status) {
     var promises = [];
 
     var instagramLocations = [
-        "6903506", // ODTÜ Bilgisayar Mühendisliği
-        "12761602", // Odtü Elektrik-Elektronik Muhendisliği Bölümü E Binası
-        "173120818", // ODTU Bilgisayar Mühendisliği Kantini
+        "6903506", // Example location 1
+        "12761602", // Example location 2
+        "173120818", // Example location 3
         "469345475", // METU Computer Center
         "612117313" // METU, Computer Engineering
     ];
