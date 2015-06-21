@@ -14,10 +14,10 @@ function getTweetsFromLocation(urlLink) {
 
     // Source: https://github.com/sreejithbnaick/Twitter-OAuth-1.1-Signature-Generator-js
 
-    var consumerSecret = "p9qwerövmbkgorpsmznaırphğxmansıdsvV9IsUQSxRShy8uKK"; // TODO Add your own
-    var tokenSecret = "Wj6RxWQz6zy058e2M4zNXPRfqrEyıbuxyasdnfgr10lo";  // TODO Add your own
-    var oauth_consumer_key = "hKHVs8mhtsahnmaPSLhtrwscS";   // TODO Add your own
-    var oauth_token = "2900794837-RUQFnvgypnodsuasdkncxıogjszmbnbnaexNt6ed"; // TODO Add your own
+    var consumerSecret = "enteryourstringhere"; // TODO Add your own
+    var tokenSecret = "enteryourstringhere";  // TODO Add your own
+    var oauth_consumer_key = "enteryourstringhere";   // TODO Add your own
+    var oauth_token = "enteryourstringhere"; // TODO Add your own
 
     var nonce = oauth.nonce(32);
     var ts = Math.floor(new Date().getTime() / 1000);
@@ -112,10 +112,10 @@ function getTweetsFrom(screen_name, count) {
 
     var urlLink = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='+screen_name+'&count='+count;
 
-    var consumerSecret = "p9qwerövmbkgorpsmznaırphğxmansıdsvV9IsUQSxRShy8uKK"; // TODO Add your own
-    var tokenSecret = "Wj6RxWQz6zy058e2M4zNXPRfqrEyıbuxyasdnfgr10lo";  // TODO Add your own
-    var oauth_consumer_key = "hKHVs8mhtsahnmaPSLhtrwscS";   // TODO Add your own
-    var oauth_token = "2900794837-RUQFnvgypnodsuasdkncxıogjszmbnbnaexNt6ed"; // TODO Add your own
+    var consumerSecret = "enteryourstringhere"; // TODO Add your own
+    var tokenSecret = "enteryourstringhere";  // TODO Add your own
+    var oauth_consumer_key = "enteryourstringhere";   // TODO Add your own
+    var oauth_token = "enteryourstringhere"; // TODO Add your own
 
     var nonce = oauth.nonce(32);
     var ts = Math.floor(new Date().getTime() / 1000);
@@ -265,12 +265,11 @@ function getInstagramPostsFromLocation(locationId) {
 function startBackgroundJob(request, status) {
     var promises = [];
 
-    var instagramLocations = [
-        "6903506", // ODTÜ Bilgisayar Mühendisliği
-        "12761602", // Odtü Elektrik-Elektronik Muhendisliği Bölümü E Binası
-        "173120818", // ODTU Bilgisayar Mühendisliği Kantini
-        "469345475", // METU Computer Center
-        "612117313" // METU, Computer Engineering
+    var instagramLocations = [r
+        "612117313", // Stanford, Computer Science
+        "43275355", // Caltech, Computer Science
+        "467863457", // Tokyo uni, Computer Science
+        "3457633" // Harvard, Computer Science
     ];
 
     var urlLink = 'https://api.twitter.com/1.1/search/tweets.json?q=%3F&geocode=39.891838,32.783348,1.8km&count=100';
