@@ -24,4 +24,5 @@ With this code you can get;
 ####Notes
 
 Make sure to read twitter & instagram api rules.
+Thanks to: https://github.com/sreejithbnaick/Twitter-OAuth-1.1-Signature-Generator-js
 
