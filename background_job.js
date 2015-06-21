@@ -65,7 +65,6 @@ function getTweetsFromLocation(urlLink) {
         success: function(httpResponse) {
             var promises = [];
             var tweets = JSON.parse(httpResponse.text);
-            var userId = 'VInSjjxan7'; //TODO change to your own user
 
             _.each(tweets.statuses, function(tweet) {
                 var tweetId = tweet.id_str;
@@ -78,29 +77,17 @@ function getTweetsFromLocation(urlLink) {
                 var profilePicture = tweet.user.profile_image_url;
                 var isReply = tweet.in_reply_to_status_id;
                 var isMentioned = tweet.entities.user_mentions.length;
-                var cardText = tweetText + '\n\n' + name;
-
                 var isRT = tweet.retweeted_status;
-                if (isRT === undefined) {
-                    isRT = 1;
-                } else {
-                    isRT = tweet.retweeted_status.length;
+
+                function doSomethingWithTweet() {
+                    var promise = new Parse.Promise();
+                    // I am doing something with the twitter content
+                    promise.resolve();
+                    return promise;
                 }
+                
+                promises.push(doSomethingWithTweet());
 
-                var isPostNew = new Date().getTime() - (24 * 60 * 60 * 1000) < createdAt.getTime();
-
-                // TODO change the if case according to your need
-                if (!isReply && !isMentioned && isRT === 1 && retweetCount + favoriteCount > 5 && isPostNew) {
-
-                    function doSomethingWithTweet() {
-                        var promise = new Parse.Promise();
-                        // I am doing something with the twitter content
-                        promise.resolve();
-                        return promise;
-                    }
-                    
-                    promises.push(doSomethingWithTweet());
-                }
             });
 
             Parse.Promise.when(promises).then(function() {
@@ -178,39 +165,32 @@ function getTweetsFrom(screen_name, count) {
             var tweets = JSON.parse(httpResponse.text);
             var userId = '';
 
-            if (screen_name === "parodyrektor") { //TODO change the screen name to your tweet screen name
+            if (screen_name === "elonmusk") { //TODO change the screen name to your tweet screen name
                 userId = "UoJtTrEdty";  //TODO change the id
-            } else if (screen_name === "odtuogrencileri") { //TODO change the screen name to your tweet screen name
+            } else if (screen_name === "boredelonmusk") { //TODO change the screen name to your tweet screen name
                 userId = "fOYCZdAtno";   //TODO change the id            
             }
 
             _.each(tweets, function(tweet) {
-                // console.log("Tweet :" + JSON.stringify(tweet));
-
-                // var retweetCount = tweet.retweet_count;
-                // var favoriteCount = tweet.favorite_count;
+                var retweetCount = tweet.retweet_count;
+                var favoriteCount = tweet.favorite_count;
                 var createdAt = new Date(tweet.created_at);
                 var tweetId = tweet.id_str;
                 var tweetText = tweet.text;
-                // var name = tweet.user.name;
-                // var screenName = tweet.user.screen_name;
-                // var profilePicture = tweet.user.profile_image_url;
+                var name = tweet.user.name;
+                var screenName = tweet.user.screen_name;
+                var profilePicture = tweet.user.profile_image_url;
                 var isReply = tweet.in_reply_to_status_id;
                 var cardText = tweetText.trim();
 
-                var isPostNew = new Date().getTime() - (24 * 60 * 60 * 1000) < createdAt.getTime();
-
-                if (!isReply && isPostNew) {
-
-                    function doSomethingWithThisTweet() {
-                        var promise = new Parse.Promise();
-                        // I am doing something with the twitter content
-                        promise.resolve();
-                        return promise;
-                    }
-                    
-                    promises.push(doSomethingWithThisTweet());
+                function doSomethingWithThisTweet() {
+                    var promise = new Parse.Promise();
+                    // I am doing something with the twitter content
+                    promise.resolve();
+                    return promise;
                 }
+                
+                promises.push(doSomethingWithThisTweet());
             });
 
             Parse.Promise.when(promises).then(function() {
@@ -242,7 +222,6 @@ function getInstagramPostsFromLocation(locationId) {
         var promises = [];
 
         var data = httpResponse.data.data;
-        var userId = "HU9hiPvMHw"; // TODO Change
 
         var ts = Math.floor( (new Date().getTime() - (24 * 60 * 60 * 1000)) / 1000) ;
         var timestamp = ts.toString();
@@ -253,36 +232,17 @@ function getInstagramPostsFromLocation(locationId) {
             var location = post.location.name;
             var commentCount = post.comments.count;
             var likeCount = post.likes.count;
-
-            if (post.user.full_name === undefined || post.user.full_name === '') {
-                var userName = post.user.username;
-            } else {
-                var userName = post.user.full_name;
-            }
-
             var instaId = post.id;
-            var instaPromise = new Parse.Promise();
-
-            if (type == "image" && timestamp < createdAt) {
-                function doSomethingWithThisInstagramPicture() {
-                    var promise = new Parse.Promise();
-                    // I am doing something with the Instagram content
-                    promise.resolve();
-                    return promise;
-                }
-                
-                promises.push(doSomethingWithThisInstagramPicture());
-                                 
-            } else if (type == 'video' && timestamp < createdAt) {
-                function doSomethingWithThisInstagramVideo() {
-                    var promise = new Parse.Promise();
-                    // I am doing something with the Instagram content
-                    promise.resolve();
-                    return promise;
-                }
-                
-                promises.push(doSomethingWithThisInstagramVideo());
+               
+            function doSomethingWithThisInstagram() {
+                var promise = new Parse.Promise();
+                // I am doing something with the Instagram content
+                promise.resolve();
+                return promise;
             }
+            
+            promises.push(doSomethingWithThisInstagram());
+
         });
 
         if (promises.length == 0) {
@@ -306,9 +266,9 @@ function startBackgroundJob(request, status) {
     var promises = [];
 
     var instagramLocations = [
-        "6903506", // Example location 1
-        "12761602", // Example location 2
-        "173120818", // Example location 3
+        "6903506", // ODTÜ Bilgisayar Mühendisliği
+        "12761602", // Odtü Elektrik-Elektronik Muhendisliği Bölümü E Binası
+        "173120818", // ODTU Bilgisayar Mühendisliği Kantini
         "469345475", // METU Computer Center
         "612117313" // METU, Computer Engineering
     ];
@@ -316,8 +276,8 @@ function startBackgroundJob(request, status) {
     var urlLink = 'https://api.twitter.com/1.1/search/tweets.json?q=%3F&geocode=39.891838,32.783348,1.8km&count=100';
 
     // Get from twitter
-    promises.push(getTweetsFrom('parodyrektor', 15));
-    promises.push(getTweetsFrom('odtuogrencileri', 15));
+    promises.push(getTweetsFrom('elonmusk', 15));
+    promises.push(getTweetsFrom('boredelonmusk', 15));
     promises.push(getTweetsFromLocation(urlLink));
 
     // Get from instagram
@@ -326,10 +286,8 @@ function startBackgroundJob(request, status) {
     });
 
     Parse.Promise.when(promises).then(function() {
-        console.log('error donmedi');
         status.success("Backgroundjob completed");
     }, function(error) {
-        console.log('error dondu');
         status.success("Backgroundjob error occured ");
     });
 }
